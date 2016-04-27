@@ -189,6 +189,8 @@ for step in range(max_steps):
         SaveOrientation[saveT,:] = Orientation
         SaveOrder[saveT] = 1 / N * np.linalg.norm([np.sum(np.cos(Orientation)), np.sum(np.sin(Orientation))])
         
+        print("Step: \t" + str(step) + " \tOrder parameter: %.2f" % (SaveOrder[saveT]))
+        
 np.savez("output_"+str(N)+"_"+str(align)+"_"+str(self)+".npz", 
          SaveLocation=SaveLocation,
          SaveOrientation=SaveOrientation,
