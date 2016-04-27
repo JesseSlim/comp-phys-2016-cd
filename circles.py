@@ -61,6 +61,8 @@ def circles(x, y, s, c='b', vmin=None, vmax=None, **kwargs):
       
     collection.set_facecolors('none')
     collection.set_facecolor('none')
+    if (kwargs['facecolor'] != 'none'):
+        collection.set_facecolors('r');
 
     ax = plt.gca()
     ax.add_collection(collection)

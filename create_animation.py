@@ -53,13 +53,14 @@ for t in range(StartStep, EndStep):
     plt.figure(figsize=(18,8))
     axSheet = plt.subplot(121, aspect='equal')
     #circles.circles(SaveLocation[t,:,0], SaveLocation[t,:,1], Radius, fc='none')
-    plt.scatter(SaveLocation[t,:,0], SaveLocation[t,:,1], s=0.01, color='b')
+    plt.scatter(SaveLocation[t,:,0], SaveLocation[t,:,1], s=0.1, color='b')
 
     plt.xlim(MigrationCenter[0] + np.array([-1, 1]) * MigrationReach/2 * MarginFactorSheet)
     plt.ylim(MigrationCenter[1] + np.array([-1, 1]) * MigrationReach/2 * MarginFactorSheet)
 
     axCloseUp = plt.subplot(122, aspect='equal')
-    circles.circles(SaveLocation[t,:,0], SaveLocation[t,:,1], Radius, fc='none')
+    circles.circles(SaveLocation[t,1:,0], SaveLocation[t,1:,1], Radius[1:], fc='none')
+    circles.circles(SaveLocation[t,0,0], SaveLocation[t,0,1], Radius[0], ec='r', fc='r', color='r')
 
     EndPoints = SaveLocation[t,:,:] + np.array([Radius * np.cos(SaveOrientation[t,:]), Radius * np.sin(SaveOrientation[t,:])]).T
     LineSegments = np.zeros((NumParticles, 2, 2))
@@ -76,5 +77,5 @@ for t in range(StartStep, EndStep):
     plt.cla()
     plt.clf()
     plt.close()
-    if (t % (0.01) * NumSteps) < 1:
+    if (t %  np.int(NumSteps/100)) < 1:
         print_fl("Progress: %d%%" % (t*100/NumSteps))
