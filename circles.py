@@ -58,6 +58,9 @@ def circles(x, y, s, c='b', vmin=None, vmax=None, **kwargs):
     if c is not None:
         collection.set_array(np.asarray(c))
         collection.set_clim(vmin, vmax)
+      
+    collection.set_facecolors('none')
+    collection.set_facecolor('none')
 
     ax = plt.gca()
     ax.add_collection(collection)

@@ -52,7 +52,8 @@ MarginFactorCloseup = 1.0
 for t in range(StartStep, EndStep):
     plt.figure(figsize=(18,8))
     axSheet = plt.subplot(121, aspect='equal')
-    circles.circles(SaveLocation[t,:,0], SaveLocation[t,:,1], Radius, fc='none')
+    #circles.circles(SaveLocation[t,:,0], SaveLocation[t,:,1], Radius, fc='none')
+    plt.scatter(SaveLocation[t,:,0], SaveLocation[t,:,1], s=0.01, color='b')
 
     plt.xlim(MigrationCenter[0] + np.array([-1, 1]) * MigrationReach/2 * MarginFactorSheet)
     plt.ylim(MigrationCenter[1] + np.array([-1, 1]) * MigrationReach/2 * MarginFactorSheet)
@@ -71,7 +72,7 @@ for t in range(StartStep, EndStep):
     plt.xlim(Centers[t,0] + np.array([-1, 1]) * ExtremeSize/2 * MarginFactorCloseup)
     plt.ylim(Centers[t,1] + np.array([-1, 1]) * ExtremeSize/2 * MarginFactorCloseup)
     
-    plt.savefig(OutDir + ("/frame-%08d.png" % t), dpi=300)
+    plt.savefig(OutDir + ("/frame-%08d.png" % t), dpi=100)
     plt.cla()
     plt.clf()
     plt.close()
