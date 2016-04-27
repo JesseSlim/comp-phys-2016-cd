@@ -141,7 +141,7 @@ def NeighbourOverlap(Location, Neighbours, Radius, Distances):
 
 
 
-max_steps = np.int(1E5);
+max_steps = np.int(1E6);
 
 #warnings.simplefilter("error")
 
