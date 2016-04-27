@@ -141,7 +141,7 @@ def NeighbourOverlap(Location, Neighbours, Radius, Distances):
 
 
 
-max_steps = np.int(1E2);
+max_steps = np.int(1E5);
 
 #warnings.simplefilter("error")
 
@@ -159,8 +159,11 @@ SaveInterval = int(100)
 NumSaves = int(max_steps/SaveInterval)
 SaveLocation = np.zeros((NumSaves, ParticleCount, 2))
 SaveOrientation = np.zeros((NumSaves, ParticleCount))
+SaveOrder = np.zeros((NumSaves))
 
 for step in range(max_steps):
+    if (step%100==0):
+        print(step)
     
     Distances[:,:] = scipy.spatial.distance.squareform(scipy.spatial.distance.pdist(Location))
     Neighbours[:] = (Distances < NeighbourCutoff) & ~np.eye(Location.shape[0], dtype=np.bool)
@@ -184,10 +187,12 @@ for step in range(max_steps):
         saveT = int(step / SaveInterval)
         SaveLocation[saveT,:,:] = Location
         SaveOrientation[saveT,:] = Orientation
-
+        SaveOrder[saveT] = 1 / N * np.linalg.norm([np.sum(np.cos(Orientation)), np.sum(np.sin(Orientation))])
+        
 np.savez("output_"+str(N)+"_"+str(align)+"_"+str(self)+".npz", 
          SaveLocation=SaveLocation,
          SaveOrientation=SaveOrientation,
+         SaveOrder=SaveOrder,
          TimeStep=TimeStep,
          L_align=L_align,
          L_noise=L_noise,

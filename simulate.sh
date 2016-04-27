@@ -1,6 +1,7 @@
 #!/bin/bash
 #PBS -l nodes=6:ppn=20
 #cd $PBS_O_WORKDIR
+PYTHONPATH=/home/jthijssen/python_pkg/lib/python3.5/site-packages
 
 for i in 0.10 0.14 0.20 0.30 0.45 0.67 1;
 do
@@ -8,7 +9,7 @@ do
 	do
 		for k in 200 400 800;
 		do
-			python Penguin.py $k $j $i
+			${PYTHONPATH}python Penguin.py $k $j $i
 		done
 	done
 done
