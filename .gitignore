@@ -1,2 +1,4 @@
 .ipy*
 __py*
+*.png
+*.npz
