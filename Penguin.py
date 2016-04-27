@@ -43,8 +43,8 @@ Radius                   = np.random.normal(AverageRadius, DeviationRadius, Part
 X = X.reshape(-1);
 Y = Y.reshape(-1);
 Location = np.zeros([ParticleCount, 2]);
-Location[:,0] = X;
-Location[:,1] = Y;
+Location[:,0] = X*InitialSpacing;
+Location[:,1] = Y*InitialSpacing;
 
 
 Velocity                 = np.zeros((ParticleCount, 2))
@@ -141,7 +141,7 @@ def NeighbourOverlap(Location, Neighbours, Radius, Distances):
 
 
 
-max_steps = np.int(1E5);
+max_steps = np.int(1E6);
 
 #warnings.simplefilter("error")
 
